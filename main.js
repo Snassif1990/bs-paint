@@ -15,15 +15,15 @@
  * To make the second one happen, the number to change
  * is the first argument to `repeat`, currently set at 10.
  */
-const gridWidth = 25;
+const gridWidth = 30;
 let count = 0;
 while (count <= gridWidth * gridWidth) {
   const canvas = document.querySelector('.canvas');
   const div = document.createElement('div');
-  div.className = 'square color-5';
+  div.className = 'square color-18';
   canvas.appendChild(div);
   count++;
-}
+};
 // You probably should NOT do these in the order below.
 // That is, you probably should NOT do all the queries,
 // THEN all the functions,
@@ -48,14 +48,20 @@ while (count <= gridWidth * gridWidth) {
 // Add queries for all your squares, palette colors, and brush here.
 // (Note the singular or plural used in that sentence!)
 
-const paletteColors=document.querySelectorAll(".palette-color");
-const brush = document.querySelector('.current-brush');
-const squares = document.querySelectorAll(".square");
-//const page = document.querySelector('html');
 
-//let currentColor = brush.classList[1];
+const brush = document.querySelector(".current-brush");
+const colors = document.querySelector('.paint-colors');
+const canvas = document.querySelector('.canvas');
+const squares = document.querySelectorAll('.canvas div');
+const body = document.querySelector('body');
+const paletteIcon = document.querySelector('.palette-icon');
+
+
+let darkModeTrue = false;
+let paintColors = document.querySelector('.paint-colors');
+let currentBrush = document.querySelector('.current-brush')
 let mouseDown = false;
-
+let darkModeButton = document.querySelector('button');
 /****************************
  * EVENT LISTENER FUNCTIONS *
 ****************************/
@@ -66,21 +72,62 @@ let mouseDown = false;
 // run as event listeners (after the next step is set up) isn't a
 // bad idea for testing purposes.
 
-for (const e of squares)
-  e.addEventListener("mouseenter",handleMouseOverSquare),
-  e.addEventListener("click",handleClickSquare);
+colors.addEventListener('click', function(event){
+  console.log(event.target.classList)
+  swapColor(brush, event.target);
+});
 
-function handleClickPaletteColor(e){
-  const o=document.querySelector(".current-brush");
-  o.classList.replace(getColor(o),getColor(e.target))
-}
+for (let i = 0; i < squares.length; i++){
+  let square = squares[i];
+  square.addEventListener('click', function(){
+    if (mouseDown === false){
+      swapColor(square, brush);
+    }
+  })
 
-for(const e of paletteColors)
-  e.addEventListener("click",handleClickPaletteColor);
+  square.addEventListener('mouseenter', function(){
+    if (mouseDown === true){
+      swapColor(square, brush);
+    }
+  });
+};
 
-document.body.addEventListener("mousedown", () => {
-  console.log("mouse"),mouseDown=true}),document.body.addEventListener("mouseup", () => {
-    console.log("mouse"),mouseDown=false
+document.addEventListener('mousedown', function(){
+  mouseDown = true;
+});
+
+document.addEventListener('mouseup', function(){
+  mouseDown = false;
+});
+
+darkModeButton.addEventListener('click', function(){
+  if (darkModeTrue === false){
+    darkModeTrue = true;
+    console.log('dark mode baby')
+  } else {
+    darkModeTrue = false;
+    console.log('light mode')
+  }
+  darkModeButton.classList.toggle('buttonDarkMode');
+  body.classList.toggle('bodyDarkMode')
+  paletteIcon.classList.toggle('palette-iconDarkMode')
+  if (darkModeTrue === false){
+    console.log('Now In Light Mode')
+    swapColorWithColor(currentBrush, 'color-18')
+  } else {
+    console.log('Now In Dark Mode')
+    swapColorWithColor(currentBrush, 'color-18DarkMode');
+  }
+  for (let i = 0; i < paintColors.children.length; i++){
+    let color = paintColors.children[i];
+    let newColor;
+    if (darkModeTrue === true){
+      newColor = `color-${i+1}DarkMode`;
+    } else {
+      newColor = `color-${i+1}`;
+    }
+    swapColorWithColor(color, newColor)
+  }
 });
 
 /**************************
@@ -92,36 +139,15 @@ document.body.addEventListener("mousedown", () => {
 // square and for each palette color from the functions you
 // wrote above.
 
-function getColor(e){
-  return e.classList[1]
+function swapColor(domToReplace, domColor){
+  let classColor = domToReplace.classList.item(1);
+  domToReplace.classList.remove(classColor);
+  classColor = domColor.classList.item(1);
+  domToReplace.classList.add(classColor);
 }
 
-function handleClickSquare(e){
-  const o=e.target,t=document.querySelector(".current-brush");
-  o.classList.replace(getColor(o),getColor(t)),
-  mouseDown = false
+function swapColorWithColor(domToReplace, color){
+  let classColor = domToReplace.classList.item(1);
+  domToReplace.classList.remove(classColor);
+  domToReplace.classList.add(color);
 }
-
-function handleMouseOverSquare(e){
-  if(mouseDown){
-    const o=e.target,t=document.querySelector(".current-brush");
-    o.classList.replace(getColor(o),getColor(brush))
-  }
-}
-
-for (const e of squares)
-  e.addEventListener("mouseenter",handleMouseOverSquare),
-  e.addEventListener("click",handleClickSquare);
-
-function handleClickPaletteColor(e){
-  const o=document.querySelector(".current-brush");
-  o.classList.replace(getColor(o),getColor(e.target))
-}
-
-for(const e of paletteColors)
-  e.addEventListener("click",handleClickPaletteColor);
-
-document.body.addEventListener("mousedown", () => {
-  console.log("mouse"),mouseDown=true}),document.body.addEventListener("mouseup", () => {
-    console.log("mouse"),mouseDown=false
-});

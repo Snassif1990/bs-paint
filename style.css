@@ -1,9 +1,12 @@
+body{
+  background-color: olivedrab;
+}
 .app {
   display: flex;
-  height: 500px;
+  height: 700px;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  margin: 20px;
 }
 
 .headings {
@@ -12,49 +15,73 @@
   align-items: center;
 }
 
-.brush-selection {
-  height: 70px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .paint {
-  height: 250px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  align-items: center;
+}
+
+.brush-selection {
+  height: 125px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  margin: 5px;
 }
 
-.palette {
+.palette-pic {
   display: flex;
-  margin-left: -30px;
-}
-
-.brush {
-  display: flex;
-}
-
-.icon {
-  width: 30px;
+  flex-direction: row;
+  width: 60px;
   height: 30px;
+  margin-bottom: 2px;
 }
 
-.current-brush, .palette-color {
+.paint-colors{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 200px;
+}
+
+.palette-color{
   width: 30px;
   height: 30px;
   border: 1px solid black;
+  margin-right: 1px;
+  margin-top: 1px;
+}
+
+.palette-icon{
+  border: 1px solid black;
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  margin-right: 1px;
+}
+
+.brush-icon{
+  height: 30px;
+  width: 30px;
+  border: solid 1px black;
+}
+
+.current-brush{
+  height: 32px;
+  width: 32px;
 }
 
 .canvas {
   display: grid;
-  grid-template-rows: repeat(25, 1fr);
-  grid-template-columns: repeat(125, 1fr);
+  grid-template-rows: repeat(30, 1fr);
+  grid-template-columns: repeat(30, 1fr);
   height: 500px;
   width: 500px;
-  border: 1px solid black;
+  border: 2px solid black;
+  margin-top: 1px;
 }
 
 .square {
@@ -62,41 +89,157 @@
 }
 
 .color-1 {
-  background-color: aqua;
+  background-color: aquamarine;
 }
-
-.color-2 {
+.color-1DarkMode{
   background-color: blueviolet;
 }
 
-.color-3 {
+.color-2 {
   background-color: crimson;
 }
-
-.color-4 {
+.color-2DarkMode{
   background-color: darkgoldenrod;
 }
 
-.color-5 {
+.color-3 {
   background-color: forestgreen;
 }
-
-.color-6 {
+.color-3DarkMode{
   background-color: greenyellow;
 }
 
-.color-7 {
+.color-4 {
+  background-color: hotpink;
+}
+.color-4DarkMode{
+  background-color: indianred;
+}
+
+.color-5 {
+  background-color: khaki;
+}
+.color-5DarkMode{
+  background-color:sienna;
+}
+
+.color-6 {
+  background-color: lightgray;
+}
+.color-6DarkMode{
+  background-color: darkolivegreen;
+}
+
+.color-7{
+  background-color: mediumpurple;
+}
+.color-7DarkMode{
+  background-color: navy;
+}
+
+.color-8{
+  background-color: orchid;
+}
+.color-8DarkMode{
+  background-color: firebrick;
+}
+
+.color-9{
+  background-color: plum;
+}
+.color-9DarkMode{
+  background-color: darkgreen;
+}
+
+.color-10{
+  background-color: rosybrown;
+}
+.color-10DarkMode{
+  background-color: darkslateblue;
+}
+
+.color-11{
+  background-color: skyblue;
+}
+.color-11DarkMode{
   background-color: hotpink;
 }
 
-.color-8 {
-  background-color: ivory;
+.color-12{
+  background-color: teal;
+}
+.color-12DarkMode{
+  background-color: darkturquoise;
 }
 
-.color-9 {
-  background-color: khaki;
+.color-13{
+  background-color: violet;
+}
+.color-13DarkMode{
+  background-color: deeppink;
 }
 
-.color-10 {
-  background-color: lightgoldenrodyellow;
+.color-14{
+  background-color: wheat;
+}
+.color-14DarkMode{
+  background-color: darkcyan;
+}
+
+.color-15{
+  background-color: yellow;
+}
+.color-15DarkMode{
+  background-color: turquoise;
+}
+
+.color-16{
+  background-color: fuchsia;
+}
+.color-16DarkMode{
+  background-color:darkgoldenrod;
+}
+
+.color-17{
+  background-color: indigo;
+}
+.color-17DarkMode{
+  background-color: darkorchid;
+}
+
+.color-18{
+  background-color: white;
+}
+.color-18DarkMode{
+  background-color: slategray;
+}
+
+button{
+  margin: 20px;
+  padding: 10px;
+  font-weight: bold;
+  border: solid black 2px;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+button:hover{
+  opacity: 0.3;
+}
+
+.buttonDarkMode{
+  margin: 20px;
+  padding: 10px;
+  font-weight: bold;
+  border: solid black 4px;
+  border-radius: 10px;
+  background-color: darkgrey;
+}
+
+.bodyDarkMode{
+  background-color: darkslateblue;
+}
+
+.palette-iconDarkMode{
+  background-color: slategray;
 }
