@@ -15,7 +15,7 @@
  * To make the second one happen, the number to change
  * is the first argument to `repeat`, currently set at 10.
  */
-const gridWidth = 10;
+const gridWidth = 25;
 let count = 0;
 while (count <= gridWidth * gridWidth) {
   const canvas = document.querySelector('.canvas');
@@ -24,7 +24,6 @@ while (count <= gridWidth * gridWidth) {
   canvas.appendChild(div);
   count++;
 }
-
 // You probably should NOT do these in the order below.
 // That is, you probably should NOT do all the queries,
 // THEN all the functions,
@@ -49,7 +48,13 @@ while (count <= gridWidth * gridWidth) {
 // Add queries for all your squares, palette colors, and brush here.
 // (Note the singular or plural used in that sentence!)
 
+const paletteColors=document.querySelectorAll(".palette-color");
+const brush = document.querySelector('.current-brush');
+const squares = document.querySelectorAll(".square");
+//const page = document.querySelector('html');
 
+//let currentColor = brush.classList[1];
+let mouseDown = false;
 
 /****************************
  * EVENT LISTENER FUNCTIONS *
@@ -61,7 +66,22 @@ while (count <= gridWidth * gridWidth) {
 // run as event listeners (after the next step is set up) isn't a
 // bad idea for testing purposes.
 
+for (const e of squares)
+  e.addEventListener("mouseenter",handleMouseOverSquare),
+  e.addEventListener("click",handleClickSquare);
 
+function handleClickPaletteColor(e){
+  const o=document.querySelector(".current-brush");
+  o.classList.replace(getColor(o),getColor(e.target))
+}
+
+for(const e of paletteColors)
+  e.addEventListener("click",handleClickPaletteColor);
+
+document.body.addEventListener("mousedown", () => {
+  console.log("mouse"),mouseDown=true}),document.body.addEventListener("mouseup", () => {
+    console.log("mouse"),mouseDown=false
+});
 
 /**************************
  * WIRING IT ALL TOGETHER *
@@ -71,3 +91,37 @@ while (count <= gridWidth * gridWidth) {
 // You'll need to add the appropriate event listener for each
 // square and for each palette color from the functions you
 // wrote above.
+
+function getColor(e){
+  return e.classList[1]
+}
+
+function handleClickSquare(e){
+  const o=e.target,t=document.querySelector(".current-brush");
+  o.classList.replace(getColor(o),getColor(t)),
+  mouseDown = false
+}
+
+function handleMouseOverSquare(e){
+  if(mouseDown){
+    const o=e.target,t=document.querySelector(".current-brush");
+    o.classList.replace(getColor(o),getColor(brush))
+  }
+}
+
+for (const e of squares)
+  e.addEventListener("mouseenter",handleMouseOverSquare),
+  e.addEventListener("click",handleClickSquare);
+
+function handleClickPaletteColor(e){
+  const o=document.querySelector(".current-brush");
+  o.classList.replace(getColor(o),getColor(e.target))
+}
+
+for(const e of paletteColors)
+  e.addEventListener("click",handleClickPaletteColor);
+
+document.body.addEventListener("mousedown", () => {
+  console.log("mouse"),mouseDown=true}),document.body.addEventListener("mouseup", () => {
+    console.log("mouse"),mouseDown=false
+});
